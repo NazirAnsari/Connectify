@@ -1,0 +1,23 @@
+body #pic {
+  margin: 30px auto;
+}
+
+body form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body input {
+  width: 250px;
+  padding: 5px;
+  margin: 3px;
+}
+
+body .picture {
+  text-align: center;
+}
+
+body #naam {
+  text-align: center;
+}

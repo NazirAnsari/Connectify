@@ -1,0 +1,40 @@
+<!-- list item for every post -->
+<li id="post-<%= post._id%>"> 
+    <p>
+            <!-- check - if user is signed in and its equal to the user who created the post -->
+            <% if (locals.user  && locals.user.id == post.user.id) { %>
+            <small>
+                    <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">X</a>
+            </small>
+            <% } %>
+            <%= post.content %>
+            <br>
+            <small>
+                    <%= post.user.name %>
+                    
+            </small>
+    </p> 
+    <div class ="post-comments">
+          <!--if user is present then only form will be visible-->
+          <% if (locals.user){ %>
+            <form id="post-<%= post._id %>-comments-form" action="/comments/create" method="POST">
+                    <input type="text" name="content" placeholder="Type Here to add comment..." required>
+                    
+                    <!--  we need to send the post id at which i need to add comment to.. -->
+                    <input type="hidden" name="post" value="<%=post._id%>">
+                    <input type="submit" value="Add Comment">
+            </form>
+            <% } %>
+
+            <div class="post-comments-list">
+                    <ul id="post-comments-<%= post._id %>">  
+                            <!-- comments are inside the post -->
+                            <!-- we will iterate over all the comments of post and display the details   we have populated them already-->
+                            <% for(comment of post.comments){%>
+                                <%- include('_comment')-%>
+                                    
+                            <% } %>
+                    </ul>
+            </div>
+    </div>     
+</li>
